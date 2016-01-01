@@ -7,7 +7,9 @@
 
 int CoinGame::calculateWinner()
 {
-	return minimax(top, true);
+	generateTree();
+	return 1;
+	//return minimax(top, true);
 }
 
 int CoinGame::minimax(Node* current, bool max)
@@ -28,8 +30,20 @@ int CoinGame::minimax(Node* current, bool max)
 
 void CoinGame::generateTree()
 {
-	//bool* state = new bool[coins] { true };
-	//top = new Node(NULL, state);
+	top = new Node(NULL, coins);
+	generateTreeRecursive(top);
+}
 
+void CoinGame::generateTreeRecursive(Node* parent)
+{
+	std::vector<Node*> nextGeneration;
+	if (parent->getAvailableMoves(nextGeneration))
+		return;
 
+	for (auto node : nextGeneration)
+	{
+		node->parent = parent;
+		parent->children.push_back(node);
+		generateTreeRecursive(node);
+	}
 }

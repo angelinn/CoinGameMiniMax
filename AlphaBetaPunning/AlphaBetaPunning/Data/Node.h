@@ -23,7 +23,7 @@ public:
 	size_t coins;
 
 public:
-	void getAvailableMoves(std::vector<Node*> &) const;
+	bool getAvailableMoves(std::vector<Node*> &) const;
 
 private:
 	Node(const Node &) = delete;

@@ -24,16 +24,21 @@ int Node::evaluateRec(Node* current, bool max)
 }
 
 
-void Node::getAvailableMoves(std::vector<Node*>& moves) const
+bool Node::getAvailableMoves(std::vector<Node*>& moves) const
 {
 	moves.clear();
 
 	size_t take = 3;	
+	if (take > coins)
+		throw std::out_of_range("Take number is bigger than coins.");
 	//boardCopy.sort();
-
+	bool last = false;
 	int m = 0;
 	for (int k = 0; k < take; ++k)
 	{
+		if (k > coins)
+			continue;
+
 		std::vector<bool> boardCopy;
 		int* positions = new int[coins];
 		int j = 0;
@@ -64,6 +69,7 @@ void Node::getAvailableMoves(std::vector<Node*>& moves) const
 			moves.push_back(node);
 		} while (std::next_permutation(boardCopy.begin(), boardCopy.end()));
 
+		last = (boardCopy.size() == 1);
 		printf("--------\n");
 
 		for (m; m < moves.size(); ++m)
@@ -77,4 +83,6 @@ void Node::getAvailableMoves(std::vector<Node*>& moves) const
 		delete positions;
 		printf("Next Iteration:\n");
 	}
+
+	return last;
 }

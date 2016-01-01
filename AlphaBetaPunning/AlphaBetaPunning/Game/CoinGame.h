@@ -61,6 +61,8 @@ private:
 	int minimax(Node *, bool max);
 	void generateTree();
 
+	void generateTreeRecursive(Node *);
+
 private:
 	int coins;
 	Node* top;
