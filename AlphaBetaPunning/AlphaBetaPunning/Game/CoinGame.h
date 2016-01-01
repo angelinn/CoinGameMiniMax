@@ -1,38 +1,15 @@
 #ifndef COIN_GAME_H
 #define COIN_GAME_H
 
-#include "Node.h"
+#include "..\Data\Node.h"
 #include <stdio.h>
 
 class CoinGame
 {
 public:
-	CoinGame()
+	CoinGame(int coins) : coins(coins)
 	{
-		top = new Node(NULL);
-		top->children.push_back(new Node(top));
-		top->children.push_back(new Node(top));
 
-		for (auto child : top->children)
-		{
-			child->children.push_back(new Node(child));
-			child->children.push_back(new Node(child));
-
-			for (auto inner : child->children)
-			{
-				inner->children.push_back(new Node(inner));
-				inner->children.push_back(new Node(inner));
-				for (auto in : inner->children)
-				{
-					Node* node = new Node(in);
-					node->value = rand() % 20;
-					in->children.push_back(node);
-					node = new Node(in);
-					node->value = rand() % 20;
-					in->children.push_back(node);
-				}
-			}
-		}
 	}
 
 public:
@@ -82,8 +59,10 @@ public:
 
 private:
 	int minimax(Node *, bool max);
+	void generateTree();
 
 private:
+	int coins;
 	Node* top;
 };
 

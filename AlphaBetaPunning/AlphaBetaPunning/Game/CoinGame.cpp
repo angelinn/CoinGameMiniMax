@@ -25,3 +25,11 @@ int CoinGame::minimax(Node* current, bool max)
 	}
 	return bestValue;
 }
+
+void CoinGame::generateTree()
+{
+	//bool* state = new bool[coins] { true };
+	//top = new Node(NULL, state);
+
+
+}

@@ -142,12 +142,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CoinGame.cpp" />
+    <ClCompile Include="Data\Board.cpp" />
+    <ClCompile Include="Data\Node.cpp" />
+    <ClCompile Include="Game\CoinGame.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CoinGame.h" />
-    <ClInclude Include="Node.h" />
+    <ClInclude Include="Data\Board.h" />
+    <ClInclude Include="Data\Node.h" />
+    <ClInclude Include="Game\CoinGame.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

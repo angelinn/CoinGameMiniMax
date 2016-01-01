@@ -2,9 +2,33 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Data\Board.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\CoinGame.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\Node.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CoinGame.h" />
-    <ClInclude Include="Node.h" />
+    <ClInclude Include="Data\Board.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\CoinGame.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\Node.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Data">
+      <UniqueIdentifier>{d38d5ca4-a557-4dfb-a8b1-bad6707a67be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{209af5a9-c608-48ec-b3e4-d56f380f49c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
