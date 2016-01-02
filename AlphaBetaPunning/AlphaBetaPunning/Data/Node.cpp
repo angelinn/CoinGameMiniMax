@@ -1,5 +1,7 @@
 #include "Node.h"
-#include <algorithm>
+#include "../Permutator/PermutationGenerator.h"
+
+#define MAX_TAKEABLE_COINS 3
 
 Node::Node(Node* par, size_t coins) : parent(par), value(NO_VALUE), coins(coins), board(coins, true)
 {  }
@@ -27,62 +29,23 @@ int Node::evaluateRec(Node* current, bool max)
 bool Node::getAvailableMoves(std::vector<Node*>& moves) const
 {
 	moves.clear();
+	PermutationGenerator generator;
+	Permutations permutations;
+	bool gotSomething = false;
 
-	size_t take = 3;	
-	if (take > coins)
-		throw std::out_of_range("Take number is bigger than coins.");
-	//boardCopy.sort();
-	bool last = false;
-	int m = 0;
-	for (int k = 0; k < take; ++k)
+	for (int i = 0; i < MAX_TAKEABLE_COINS; ++i)
 	{
-		if (k > coins)
-			continue;
-
-		std::vector<bool> boardCopy;
-		int* positions = new int[coins];
-		int j = 0;
-		for (int i = 0; i < board.size(); ++i)
-		{
-			if (board[i])
-				boardCopy.push_back(board[i]);
-			else
-				positions[j++] = i;
-		}
-
-		if (boardCopy.size() > 1)
-		{
-			for (int i = 0; i < k + 1; ++i)
-				boardCopy[i] = false;
-
-		}
-
 		Node* node = NULL;
-		do
-		{
-			for (auto bo : boardCopy)
-				printf("%s ", bo ? "1" : "0");
-			printf("\n");
+		permutations = generator.generatePermutations(board, coins, i + 1);
+		if (permutations.size())
+			gotSomething = true;
 
-			node = new Node(const_cast<Node*>(this), coins);
-			node->board = boardCopy;
+		for (auto permutation : permutations)
+		{
+			node = new Node(const_cast<Node *>(this), coins);
+			node->board = permutation;
 			moves.push_back(node);
-		} while (std::next_permutation(boardCopy.begin(), boardCopy.end()));
-
-		last = (boardCopy.size() == 1);
-		printf("--------\n");
-
-		for (m; m < moves.size(); ++m)
-		{
-			for (int i = 0; i < j; ++i)
-				moves[m]->board.insert(moves[m]->board.begin() + positions[i], false);
-			for (auto bo : moves[m]->board)
-				printf("%s ", bo ? "1" : "0");
-			printf("\n");
 		}
-		delete positions;
-		printf("Next Iteration:\n");
 	}
-
-	return last;
+	return gotSomething;
 }

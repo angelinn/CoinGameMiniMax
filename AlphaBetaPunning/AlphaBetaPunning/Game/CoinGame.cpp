@@ -1,4 +1,5 @@
 #include "CoinGame.h"
+#include <deque>
 
 #define MAX(a, b) a > b ? a : b
 #define MIN(a, b) a < b ? a : b
@@ -37,7 +38,7 @@ void CoinGame::generateTree()
 void CoinGame::generateTreeRecursive(Node* parent)
 {
 	std::vector<Node*> nextGeneration;
-	if (parent->getAvailableMoves(nextGeneration))
+	if (!parent->getAvailableMoves(nextGeneration))
 		return;
 
 	for (auto node : nextGeneration)
@@ -45,5 +46,39 @@ void CoinGame::generateTreeRecursive(Node* parent)
 		node->parent = parent;
 		parent->children.push_back(node);
 		generateTreeRecursive(node);
+	}
+}
+
+void CoinGame::print() const
+{
+	for (bool cur : top->board)
+		printf("%d ", cur);
+	printf("\n");
+	printRecursive(top);
+}
+
+int z = 0;
+
+void CoinGame::printRecursive(const Node* node) const
+{	
+	if (node->children.size() == 0)
+	{
+		return;
+	}
+
+
+
+	int current = z;
+	for (auto child : node->children)
+	{
+		printf("[");
+		for (bool cur : child->board)
+			printf("%d ", cur);
+		printf("]");
+	}
+	printf("\n");
+	for (auto child : node->children)
+	{
+		printRecursive(child);
 	}
 }

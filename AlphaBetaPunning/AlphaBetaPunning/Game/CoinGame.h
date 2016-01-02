@@ -13,48 +13,7 @@ public:
 	}
 
 public:
-	void print()
-	{
-		printf(" %i\n", top->value);
-		for (auto child : top->children)
-		{
-			printf(" %i ", child->value);
-		}
-		printf("\n");
-		for (auto child : top->children)
-		{
-			for (auto inner : child->children)
-			{
-				printf(" %i ", inner->value);
-			}
-		}
-		printf("\n");
-		for (auto child : top->children)
-		{
-			for (auto inner : child->children)
-			{
-				for (auto in : inner->children)
-				{
-					printf(" %i ", in->value);
-				}
-			}
-		}
-		printf("\n");
-		for (auto child : top->children)
-		{
-			for (auto inner : child->children)
-			{
-				for (auto in : inner->children)
-				{
-					for (auto hue : in->children)
-					{
-						printf("%i ", hue->value);
-					}
-				}
-			}
-		}
-		printf("\n");
-	}
+	void print() const;
 	int calculateWinner();
 
 private:
@@ -62,6 +21,7 @@ private:
 	void generateTree();
 
 	void generateTreeRecursive(Node *);
+	void printRecursive(const Node *) const;
 
 private:
 	int coins;
