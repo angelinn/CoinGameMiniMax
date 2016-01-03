@@ -9,20 +9,24 @@
 int CoinGame::calculateWinner()
 {
 	generateTree();
-	return minimax(top, true);
+	return 1;
+	//return minimax(top, true, 0);
 }
 
-int CoinGame::minimax(Node* current, bool max)
+int CoinGame::minimax(Node* current, bool max, int depth)
 {
 	if (current->children.size() == 0)
-		return current->evaluate(max);
+	{
+		current->value = (coins - depth) * (!max ? 1 : -1);
+		return current->value;
+	}
 
-	int bestValue = max ? INF : -INF;
+	int bestValue = max ? -INF : INF;
 	int childValue = 0;
 
 	for (auto iter : current->children)
 	{
-		childValue = minimax(iter, !max);
+		childValue = minimax(iter, !max, depth + 1);
 		bestValue = max ? MAX(bestValue, childValue) : MIN(bestValue, childValue);
 	}
 	return bestValue;
@@ -30,7 +34,7 @@ int CoinGame::minimax(Node* current, bool max)
 
 void CoinGame::generateTree()
 {
-	top = new Node(NULL, coins, 0);
+	top = new Node(NULL, coins);
 	generateTreeRecursive(top);
 }
 
@@ -40,12 +44,14 @@ void CoinGame::generateTreeRecursive(Node* parent)
 	if (!parent->getAvailableMoves(nextGeneration))
 		return;
 
-	for (auto node : nextGeneration)
+	for (auto& node : nextGeneration)
 	{
 		node->parent = parent;
 		parent->children.push_back(node);
-		generateTreeRecursive(node);
 	}
+
+	for (auto& node : parent->children)
+		generateTreeRecursive(node);
 }
 
 void CoinGame::print() const

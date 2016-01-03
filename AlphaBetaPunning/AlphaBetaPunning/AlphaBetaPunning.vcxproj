@@ -148,6 +148,7 @@
     <ClCompile Include="Permutator\PermutationGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CoinGameResult.h" />
     <ClInclude Include="Data\Node.h" />
     <ClInclude Include="Game\CoinGame.h" />
     <ClInclude Include="Permutator\PermutationGenerator.h" />

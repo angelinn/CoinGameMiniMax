@@ -6,9 +6,12 @@ class Node;
 class CoinGame
 {
 public:
-	CoinGame(int coins) : coins(coins)
-	{
+	CoinGame(int coins) : coins(coins), top(NULL)
+	{  }
 
+	~CoinGame()
+	{
+		delete top;
 	}
 
 public:
@@ -16,7 +19,7 @@ public:
 	int calculateWinner();
 
 private:
-	int minimax(Node *, bool max);
+	int minimax(Node *, bool, int);
 	void generateTree();
 
 	void generateTreeRecursive(Node *);

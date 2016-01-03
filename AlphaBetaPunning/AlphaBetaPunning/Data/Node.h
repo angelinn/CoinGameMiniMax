@@ -10,17 +10,20 @@ class Node
 {
 public:
 
-	Node(Node *, size_t, int);
+	Node(Node *, size_t);
+	~Node();
 
 	int evaluate(bool);
 	int evaluateRec(Node *, bool);
 
 public:
 	Node* parent;
-	std::vector<Node *> children;
 	int value;
-	std::vector<bool> board;
 	size_t coins;
+
+public:
+	std::vector<bool> board;
+	std::vector<Node *> children;
 
 public:
 	bool getAvailableMoves(std::vector<Node*> &) const;

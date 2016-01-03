@@ -13,6 +13,9 @@ void PermutationGenerator::generate(Permutations& permutations, size_t take, con
 
 	for (int i = 0; i < board.size(); ++i)
 	{
+		if (i == 1 && take == board.size())
+			break;
+
 		got = 0;
 		if (board[i])
 		{
