@@ -9,25 +9,32 @@
 int CoinGame::calculateWinner()
 {
 	generateTree();
-	return 1;
-	//return minimax(top, true, 0);
+	return minimax(top, true, -INF, INF, 0);
 }
 
-int CoinGame::minimax(Node* current, bool max, int depth)
+int CoinGame::minimax(Node* current, bool max, int alpha, int beta, int depth)
 {
 	if (current->children.size() == 0)
-	{
-		current->value = (coins - depth) * (!max ? 1 : -1);
-		return current->value;
-	}
+		return current->evaluate(max, depth);
 
 	int bestValue = max ? -INF : INF;
 	int childValue = 0;
 
 	for (auto iter : current->children)
 	{
-		childValue = minimax(iter, !max, depth + 1);
+		childValue = minimax(iter, !max, alpha, beta, depth + 1);
 		bestValue = max ? MAX(bestValue, childValue) : MIN(bestValue, childValue);
+		
+		if (max)
+			alpha = MAX(bestValue, alpha);
+		else
+			beta = MIN(bestValue, beta);
+
+		if (beta <= alpha)
+		{
+			printf("BREAKING..\n");
+			break;
+		}
 	}
 	return bestValue;
 }
@@ -58,7 +65,6 @@ void CoinGame::print() const
 {
 	for (bool cur : top->board)
 		printf("%d ", cur);
-	printf("val: %d\n", top->value);
 	printRecursive(top);
 }
 
@@ -72,7 +78,6 @@ void CoinGame::printRecursive(const Node* node) const
 		printf("[");
 		for (bool cur : child->board)
 			printf("%d ", cur);
-		printf("val: %d]", child->value);
 	}
 	printf("\n");
 	for (auto child : node->children)

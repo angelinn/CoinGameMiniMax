@@ -13,12 +13,10 @@ public:
 	Node(Node *, size_t);
 	~Node();
 
-	int evaluate(bool);
-	int evaluateRec(Node *, bool);
+	int evaluate(bool, int);
 
 public:
 	Node* parent;
-	int value;
 	size_t coins;
 
 public:

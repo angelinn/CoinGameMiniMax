@@ -2,9 +2,8 @@
 #include "../Permutator/PermutationGenerator.h"
 
 #define MAX_TAKEABLE_COINS 3
-#define NO_VALUE -1
 
-Node::Node(Node* par, size_t coins) : parent(par), value(NO_VALUE), coins(coins), board(coins, true)
+Node::Node(Node* par, size_t coins) : parent(par), coins(coins), board(coins, true)
 {  }
 
 Node::~Node()
@@ -13,25 +12,10 @@ Node::~Node()
 		delete children[i];
 }
 
-int Node::evaluate(bool max)
+int Node::evaluate(bool max, int moves)
 {
-	return evaluateRec(parent, max);
+	return (coins - moves) * (!max ? 1 : -1);
 }
-
-int Node::evaluateRec(Node* current, bool max)
-{
-	for (auto child : current->children)
-	{
-		if (current->value == NO_VALUE || (max && child->value > current->value) || (!max && child->value < current->value))
-			current->value = child->value;
-	}
-
-	if (current->parent == NULL)
-		return current->value;
-
-	return evaluateRec(current->parent, !max);
-}
-
 
 bool Node::getAvailableMoves(std::vector<Node*>& moves) const
 {

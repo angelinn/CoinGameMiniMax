@@ -6,7 +6,7 @@
 
 int main(int argc, const char* argv[])
 {
-	int coinCount = 3; // argv[1];
+	int coinCount = 8; // argv[1];
 
 	try
 	{
@@ -20,6 +20,6 @@ int main(int argc, const char* argv[])
 		printf("%s\n", e.what());
 	}
 
-	_CrtDumpMemoryLeaks();
+	//_CrtDumpMemoryLeaks();
 	return 0;
 }

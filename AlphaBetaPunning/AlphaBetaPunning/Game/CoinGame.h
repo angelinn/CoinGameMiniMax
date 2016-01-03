@@ -19,7 +19,7 @@ public:
 	int calculateWinner();
 
 private:
-	int minimax(Node *, bool, int);
+	int minimax(Node *, bool, int, int, int);
 	void generateTree();
 
 	void generateTreeRecursive(Node *);
