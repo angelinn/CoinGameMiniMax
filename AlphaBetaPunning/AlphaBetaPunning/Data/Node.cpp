@@ -2,8 +2,9 @@
 #include "../Permutator/PermutationGenerator.h"
 
 #define MAX_TAKEABLE_COINS 3
+#define NO_VALUE -1
 
-Node::Node(Node* par, size_t coins) : parent(par), coins(coins), board(coins, true)
+Node::Node(Node* par, size_t coins) : parent(par), coins(coins), board(coins, true), value(NO_VALUE)
 {  }
 
 Node::~Node()
@@ -14,12 +15,12 @@ Node::~Node()
 
 int Node::evaluate(bool max, int moves)
 {
-	return (coins - moves) * (!max ? 1 : -1);
+	value = (coins - moves) * (!max ? 1 : -1);
+	return value;
 }
 
-bool Node::getAvailableMoves(std::vector<Node*>& moves) const
+bool Node::getAvailableMoves()
 {
-	moves.clear();
 	Permutations permutations;
 	bool gotSomething = false;
 
@@ -36,7 +37,7 @@ bool Node::getAvailableMoves(std::vector<Node*>& moves) const
 		{
 			node = new Node(const_cast<Node *>(this), coins);
 			node->board = permutation;
-			moves.push_back(node);
+			children.push_back(node);
 		}
 	}
 	return gotSomething;

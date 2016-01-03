@@ -4,7 +4,6 @@
 #include <vector>
 
 #define NO_VALUE -1
-#define MAX_COINS 1024
 
 class Node
 {
@@ -17,6 +16,7 @@ public:
 
 public:
 	Node* parent;
+	int value;
 	size_t coins;
 
 public:
@@ -24,7 +24,7 @@ public:
 	std::vector<Node *> children;
 
 public:
-	bool getAvailableMoves(std::vector<Node*> &) const;
+	bool getAvailableMoves();
 
 private:
 	Node(const Node &) = delete;

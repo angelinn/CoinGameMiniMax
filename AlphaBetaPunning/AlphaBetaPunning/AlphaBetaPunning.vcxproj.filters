@@ -22,7 +22,7 @@
     <ClInclude Include="Permutator\PermutationGenerator.h">
       <Filter>Permutations</Filter>
     </ClInclude>
-    <ClInclude Include="CoinGameResult.h">
+    <ClInclude Include="Data\CoinGameResult.h">
       <Filter>Data</Filter>
     </ClInclude>
   </ItemGroup>

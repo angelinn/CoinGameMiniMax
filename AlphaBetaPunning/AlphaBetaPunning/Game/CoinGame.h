@@ -2,6 +2,7 @@
 #define COIN_GAME_H
 
 class Node;
+#include "..\Data\CoinGameResult.h"
 
 class CoinGame
 {
@@ -15,15 +16,14 @@ public:
 	}
 
 public:
-	void print() const;
-	int calculateWinner();
+	CoinGameResult calculateWinner();
 
 private:
 	int minimax(Node *, bool, int, int, int);
-	void generateTree();
 
-	void generateTreeRecursive(Node *);
-	void printRecursive(const Node *) const;
+private:
+	size_t getCoinsToTake(size_t, size_t &) const;
+	size_t getCoinIndex() const;
 
 private:
 	int coins;
