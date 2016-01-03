@@ -1,5 +1,5 @@
+#include "../Data/Node.h"
 #include "CoinGame.h"
-#include <deque>
 
 #define MAX(a, b) a > b ? a : b
 #define MIN(a, b) a < b ? a : b
@@ -9,8 +9,7 @@
 int CoinGame::calculateWinner()
 {
 	generateTree();
-	return 1;
-	//return minimax(top, true);
+	return minimax(top, true);
 }
 
 int CoinGame::minimax(Node* current, bool max)
@@ -31,7 +30,7 @@ int CoinGame::minimax(Node* current, bool max)
 
 void CoinGame::generateTree()
 {
-	top = new Node(NULL, coins);
+	top = new Node(NULL, coins, 0);
 	generateTreeRecursive(top);
 }
 
@@ -53,28 +52,21 @@ void CoinGame::print() const
 {
 	for (bool cur : top->board)
 		printf("%d ", cur);
-	printf("\n");
+	printf("val: %d\n", top->value);
 	printRecursive(top);
 }
-
-int z = 0;
 
 void CoinGame::printRecursive(const Node* node) const
 {	
 	if (node->children.size() == 0)
-	{
 		return;
-	}
 
-
-
-	int current = z;
 	for (auto child : node->children)
 	{
 		printf("[");
 		for (bool cur : child->board)
 			printf("%d ", cur);
-		printf("]");
+		printf("val: %d]", child->value);
 	}
 	printf("\n");
 	for (auto child : node->children)

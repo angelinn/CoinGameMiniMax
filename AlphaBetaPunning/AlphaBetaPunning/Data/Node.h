@@ -10,7 +10,7 @@ class Node
 {
 public:
 
-	Node(Node *, size_t);
+	Node(Node *, size_t, int);
 
 	int evaluate(bool);
 	int evaluateRec(Node *, bool);

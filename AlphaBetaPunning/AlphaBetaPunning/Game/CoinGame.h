@@ -1,8 +1,7 @@
 #ifndef COIN_GAME_H
 #define COIN_GAME_H
 
-#include "..\Data\Node.h"
-#include <stdio.h>
+class Node;
 
 class CoinGame
 {

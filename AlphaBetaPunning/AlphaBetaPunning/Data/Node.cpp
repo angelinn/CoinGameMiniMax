@@ -3,7 +3,7 @@
 
 #define MAX_TAKEABLE_COINS 3
 
-Node::Node(Node* par, size_t coins) : parent(par), value(NO_VALUE), coins(coins), board(coins, true)
+Node::Node(Node* par, size_t coins, int value) : parent(par), value(value), coins(coins), board(coins, true)
 {  }
 
 int Node::evaluate(bool max)
@@ -42,7 +42,7 @@ bool Node::getAvailableMoves(std::vector<Node*>& moves) const
 
 		for (auto permutation : permutations)
 		{
-			node = new Node(const_cast<Node *>(this), coins);
+			node = new Node(const_cast<Node *>(this), coins, value + 1);
 			node->board = permutation;
 			moves.push_back(node);
 		}
