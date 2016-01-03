@@ -9,7 +9,7 @@ int main(int argc, const char* argv[])
 
 	try
 	{
-		std::vector<bool> a{ true, false, true, true, true };
+		std::vector<bool> a{ true, true, true, true, true };
 
 		PermutationGenerator gen;
 		Permutations perm;

@@ -29,14 +29,13 @@ int Node::evaluateRec(Node* current, bool max)
 bool Node::getAvailableMoves(std::vector<Node*>& moves) const
 {
 	moves.clear();
-	PermutationGenerator generator;
 	Permutations permutations;
 	bool gotSomething = false;
 
 	for (int i = 0; i < MAX_TAKEABLE_COINS; ++i)
 	{
 		Node* node = NULL;
-		permutations = generator.generatePermutations(board, coins, i + 1);
+		PermutationGenerator::generate(permutations, i + 1, board);
 		if (permutations.size())
 			gotSomething = true;
 
